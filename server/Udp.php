@@ -34,32 +34,12 @@ class Udp
 
         //监听数据接收事件
         // 3、设置回调，发生在worker进程中
-        // $this->serv->on('packet', function ($serv, $data, $client_info) {
-        //     echo "接收到客户端信息: " . $data . PHP_EOL;
-        //     var_dump($client_info);
-        //     // 由于UDP协议不能确保信息送达，所以当服务端收到信息后最好做个应答，这样客户端才有依据来做判断
-        //     $this->serv->sendto($client_info['address'], $client_info['port'], "This is server..." . PHP_EOL);
-        // });
-        
-        //监听连接进入事件
-        // $fd 客户端连接的唯一标识 连接的文件描述符
-        // $reactor_id 连接所在的 Reactor 线程 ID
-        $server->on('Connect', function ($server, $fd, $reactor_id) {
-            echo "Client: {$reactor_id} - {$fd} - Connect.\n";
+        $this->serv->on('packet', function ($serv, $data, $client_info) {
+            echo "接收到客户端信息: " . $data . PHP_EOL;
+            var_dump($client_info);
+            // 由于UDP协议不能确保信息送达，所以当服务端收到信息后最好做个应答，这样客户端才有依据来做判断
+            $this->serv->sendto($client_info['address'], $client_info['port'], "This is server..." . PHP_EOL);
         });
-
-        //监听数据接收事件
-        $server->on('Receive', function ($server, $fd, $reactor_id, $data) {
-            $server->send($fd, "Server: {$reactor_id} - {$fd} - {$data}");
-        });
-
-        //监听连接关闭事件
-        $server->on('Close', function ($server, $fd) {
-            echo "Client: Close.\n";
-        });
-
-        //启动服务
-        $this->serv->start();
     }
 }
 
