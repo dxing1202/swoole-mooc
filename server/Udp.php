@@ -25,3 +25,6 @@ $serv->on('packet', function ($serv, $data, $client_info) {
     // 由于UDP协议不能确保信息送达，所以当服务端收到信息后最好做个应答，这样客户端才有依据来做判断
     $serv->sendto($client_info['address'], $client_info['port'], "This is server..." . PHP_EOL);
 });
+
+//启动服务器
+$serv->start();
