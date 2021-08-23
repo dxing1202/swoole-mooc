@@ -1,11 +1,16 @@
 <?php
 
+# 技巧点
+# Linux运行 可以查看进程数 tcp.php 为实际运行文件
+// ps aft | grep tcp.php
+
+
 //创建Server对象，监听 127.0.0.1:9501 端口
 $server = new Swoole\Server('127.0.0.1', 9501);
 
 $server->set([
 	// worker进程数 建议： 1-4倍CPU核数 【默认值：CPU 核数】
-	'worker_num'  => 8,
+	'worker_num'  => 2,
 	// 设置 worker 进程的最大任务数。【默认值：0 即不会退出进程】
 	'max_request' => 10000
 ]);
