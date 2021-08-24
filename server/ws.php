@@ -8,6 +8,8 @@ $ws = new Swoole\WebSocket\Server('0.0.0.0', 9502);
 
 //监听WebSocket连接打开事件
 $ws->on('open', function ($ws, $request) {
+    echo date(time(), 'Y-m-d H:i:s');
+    dump($request);
     $ws->push($request->fd, "hello, welcome\n");
 });
 
