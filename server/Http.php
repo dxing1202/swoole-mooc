@@ -10,7 +10,7 @@ $http->on('request', function ($request, $response) {
     $response->header('Content-Type', 'text/html; charset=utf-8');
     // 打印GET请求
     // var_dump($request->get);
-    $response->end('<h1>Hello Swoole. #' . rand(1000, 9999) . 'GET: ' . json_encode($request->get) . '</h1>');
+    $response->end('<h1>Hello Swoole. #' . rand(1000, 9999) . "<br/>GET: " . json_encode($request->get) . '</h1>');
 });
 
 $http->start();
