@@ -5,6 +5,11 @@ $ws = new Swoole\WebSocket\Server('0.0.0.0', 9502);
 
 // 设置 ws server 配置
 // $ws->set([]);
+// 配置支持HTTP服务
+$ws->set([
+    'enable_static_handler' => true,
+    'document_root' => '/www/wwwroot/swoole-mooc/data'
+]);
 
 //监听WebSocket连接打开事件
 $ws->on('open', function ($ws, $request) {
