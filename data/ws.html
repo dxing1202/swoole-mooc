@@ -14,6 +14,8 @@
         var websocket = new WebSocket(wsServer);
         // 实例对象的onopen属性
         websocket.onopen = function (evt) {
+            // 发送数据
+            websocket.send("hello-DXing");
             console.log("Connected to WebSocket server.");
         };
         // onclose
