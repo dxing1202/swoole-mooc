@@ -11,7 +11,7 @@ $ws->on('open', function ($ws, $request) {
     // Log记录 连接来访
     $serverInfo = $request->server;
     $date = date('Y-m-d H:i:s', $serverInfo["request_time"]);
-    $log = sprintf("Client: %s, Time: %s IP: %s Connection successful\n", $request->fd, $date, $serverInfo['remote_addr']);
+    $log = sprintf("Client: %s Time: %s IP: %s Connection successful\n", $request->fd, $date, $serverInfo['remote_addr']);
     echo $log;
 
     // var_dump($request);
