@@ -4,7 +4,7 @@
 # netstat -anp | grep 8080
 # 如果端口被占用，可以用以上的命令进行查询 是哪些程序|服务占用，Kill掉
 
-$http = new Swoole\Http\Server('0.0.0.0', 8080);
+$http = new Swoole\Http\Server('0.0.0.0', 9501);
 
 $http->on('request', function ($request, $response) {
     $response->header('Content-Type', 'text/html; charset=utf-8');
