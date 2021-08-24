@@ -6,8 +6,11 @@
 
 $http = new Swoole\Http\Server('0.0.0.0', 9501);
 
-// 
-$http->
+// 配置HTTP服务
+$http->set([
+    'enable_static_handler' => true,
+    'document_root' => '/www/wwwroot/swoole-mooc/data'
+]);
 
 $http->on('request', function ($request, $response) {
     // 解决Chrome 请求两次问题
@@ -31,6 +34,6 @@ $http->on('request', function ($request, $response) {
 });
 
 $http->start();
-enable_static_handler
+
 # 测试端口
 # curl 127.0.0.1:8080
