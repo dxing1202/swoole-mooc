@@ -28,7 +28,7 @@ $ws->on('message', function ($ws, $frame) {
 $ws->on('close', function ($ws, $fd) {
     // 当前时间
     $date = date('Y-m-d H:i:s');
-    $log = sprintf("Client:%s Time:%s Disconnected\n", $fd);
+    $log = sprintf("Client:%s Time:%s Disconnected\n", $fd, $date);
     echo $log;
 });
 
