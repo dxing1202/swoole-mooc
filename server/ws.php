@@ -11,7 +11,7 @@ $ws->on('open', function ($ws, $request) {
     // Log记录 连接来访
     $serverInfo = $request->server;
     $date = date('Y-m-d H:i:s', $serverInfo["request_time"]);
-    $log = sprintf("Client: %s Time: %s IP: %s Connection successful\n", $request->fd, $date, $serverInfo['remote_addr']);
+    $log = sprintf("Client:%s Time:%s IP:%s Connection successful\n", $request->fd, $date, $serverInfo['remote_addr']);
     echo $log;
 
     // var_dump($request);
@@ -26,7 +26,10 @@ $ws->on('message', function ($ws, $frame) {
 
 //监听WebSocket连接关闭事件
 $ws->on('close', function ($ws, $fd) {
-    echo "Client: {$fd} Disconnected\n";
+    // 当前时间
+    $date = date('Y-m-d H:i:s');
+    $log = sprintf("Client:%s Time:%s Disconnected\n", $fd);
+    echo $log;
 });
 
 $ws->start();
