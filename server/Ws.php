@@ -33,7 +33,7 @@ class Ws
      * @param  object $request Swoole\Http\Request 请求对象信息
      * @return void   无
      */
-    protected static function onOpen($server, $request)
+    public function onOpen($server, $request)
     {
         # Log记录 连接连接
         // 请求时间
@@ -51,7 +51,7 @@ class Ws
      * @param  object $frame  Swoole\WebSocket\Frame 客户端发来的数据帧信息对象
      * @return void   无
      */
-    protected static function onMessage($server, $frame) {
+    public function onMessage($server, $frame) {
         echo "Message: {$frame->data}\n";
         $server->push($frame->fd, "Server-push:{$frame->data} Time:" . date('Y-m-d H:i:s'));
     }
@@ -62,7 +62,7 @@ class Ws
      * @param  object $fd     客户端ID
      * @return void   无
      */
-    protected static function onClose($server, $fd)
+    public function onClose($server, $fd)
     {
         # Log记录 关闭事件
         // 当前时间
