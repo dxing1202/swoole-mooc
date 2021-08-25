@@ -22,7 +22,7 @@ class Ws
 
         $this->server->on('open', [$this, 'onOpen']);
         $this->server->on('message', [$this, 'onMessage']);
-        $this->server->on('disconnect', [$this, 'onDisconnect']);
+        $this->server->on('close', [$this, 'onClose']);
 
         $this->server->start();
     }
@@ -62,7 +62,7 @@ class Ws
      * @param  object $fd     客户端ID
      * @return void   无
      */
-    public function onDisconnect($server, $fd)
+    public function onClose($server, $fd)
     {
         # Log记录 关闭事件
         // 当前时间
