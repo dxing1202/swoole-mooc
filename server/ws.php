@@ -53,7 +53,7 @@ class Ws
      */
     public function onMessage($server, $frame) {
         echo "Message: {$frame->data}\n";
-        $server->push('Client:' . $frame->fd, " Server-push:{$frame->data} Time:" . date('Y-m-d H:i:s'));
+        $server->push($frame->fd, " Server-push:{$frame->data} Time:" . date('Y-m-d H:i:s'));
     }
 
     /**
