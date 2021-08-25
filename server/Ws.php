@@ -38,7 +38,7 @@ class Ws
         # Log记录 连接连接
         // 请求时间
         $date = date('Y-m-d H:i:s', $request->server["request_time"]);
-        $log = sprintf("Client:%s Time:%s IP:%s Connection successful\n", $request->fd, $date, $request->server['remote_addr']);
+        $log = sprintf("Time:%s Client:%s IP:%s Connection successful\n", $date, $request->fd, $request->server['remote_addr']);
         echo $log;
 
         // var_dump($request);
@@ -67,7 +67,7 @@ class Ws
         # Log记录 关闭事件
         // 当前时间
         $date = date('Y-m-d H:i:s');
-        $log = sprintf("Client:%s Time:%s Disconnected\n", $fd, $date);
+        $log = sprintf("Time:%s Client:%s Disconnected\n", $date, $fd);
         echo $log;
     }
 }
