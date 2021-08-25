@@ -57,7 +57,7 @@ class Ws
     }
 
     /**
-     * onDisconnect 监听WebSocket连接关闭事件
+     * onClose 监听WebSocket连接关闭事件
      * @param  object $server Swoole\WebSocket\Server 服务对象
      * @param  object $fd     客户端ID
      * @return void   无
