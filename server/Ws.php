@@ -49,7 +49,7 @@ class Ws
         echo $log;
 
         // var_dump($request);
-        $server->push($request->fd, "hello, welcome\n");
+        $serv->push($request->fd, "hello, welcome\n");
     }
 
     /**
