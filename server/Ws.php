@@ -72,9 +72,10 @@ class Ws
     /**
      * onTask 异步任务回调函数
      * @param  object $serv Swoole\WebSocket\Serve 服务对象
-     * @param  int $task_id    [description]
-     * @param  int $reactor_id [description]
-     * @param  array $data     [description]
+     * @param  int $task_id    任务ID 由Swoole扩展内自动生成，用于区分不同的任务
+     * @param  int $reactor_id 来自于哪个worker进程
+     * $task_id和$reactor_id组合起来才是全局唯一的，不同的wokrer进程投递的任务ID可能会有相同
+     * @param  array $data     任务内容&数据
      * @return void 无
      */
     public function onTask($serv, $task_id, $reactor_id, $data)
