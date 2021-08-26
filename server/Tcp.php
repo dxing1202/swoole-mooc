@@ -31,7 +31,7 @@ class Tcp
 			'max_request' => 10000
 		]);
 
-        $this->server->on('open', [$this, 'onConnect']);
+        $this->server->on('connect', [$this, 'onConnect']);
         $this->server->on('receive', [$this, 'onReceive']);
         $this->server->on('close', [$this, 'onClose']);
 
