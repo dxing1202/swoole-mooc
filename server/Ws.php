@@ -50,7 +50,13 @@ class Ws
         $log = sprintf("Time:%s Client:%s IP:%s Connection successful\n", $date, $request->fd, $request->server['remote_addr']);
         echo $log;
 
-        // var_dump($request);
+        // 测试Timer
+        if ( $request->fd == 1 ) {
+            // 每2秒执行
+            swoole_timer_tick(2000, function($time_id) {
+                echo "2s: timerId: {$time_id}" . PHP_EOL;
+            });
+        }
         $serv->push($request->fd, "hello, welcome\n");
     }
 
@@ -67,7 +73,13 @@ class Ws
             'task' => 1,
             'fd' => $frame->fd
         ];
-        $serv->task($data);
+        // 异步任务
+        // $serv->task($data);
+        
+        swoole_timer_after(5000, function() use($serv, $frame) {
+            echo "5s-after\n";
+            $serv->push($frame->fd, "server-time-after:")
+        });
         $serv->push($frame->fd, "Server-push:{$frame->data} Time:" . date('Y-m-d H:i:s'));
     }
 
@@ -82,14 +94,13 @@ class Ws
      */
     public function onTask($serv, $task_id, $reactor_id, $data)
     {
-        print_r($data);
+        // print_r($data);
+        echo "New AsyncTask[id={$task_id}]".PHP_EOL;
         // 耗时场景
         sleep(10);
         return "on task finish"; // 返回 告诉worker
-
-        // echo "New AsyncTask[id={$task_id}]".PHP_EOL;
-        // 返回任务执行的结果
-        // $this->serv->finish("{$data} -> OK");
+        
+        // 任务完成自动执行 finish 回调函数
     }
 
     public function onFinish($serv, $task_id, $data)
