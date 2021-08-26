@@ -44,8 +44,8 @@ class Ws
     {
         # Log记录 连接连接
         // 请求时间
-        $date = date('Y-m-d H:i:s', $request->server["request_time"]);
-        $log = sprintf("Time:%s Client:%s IP:%s Connection successful\n", $date, $request->fd, $request->server['remote_addr']);
+        $date = date('Y-m-d H:i:s', $request->serv["request_time"]);
+        $log = sprintf("Time:%s Client:%s IP:%s Connection successful\n", $date, $request->fd, $request->serv['remote_addr']);
         echo $log;
 
         // var_dump($request);
