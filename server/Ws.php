@@ -53,6 +53,8 @@ class Ws
      */
     public function onMessage($server, $frame) {
         echo "Message: {$frame->data}\n";
+        // Todo 10s
+        
         $server->push($frame->fd, "Server-push:{$frame->data} Time:" . date('Y-m-d H:i:s'));
     }
 
@@ -72,4 +74,4 @@ class Ws
     }
 }
 
-$ws = new Ws();
+$ws = new Ws(); 
