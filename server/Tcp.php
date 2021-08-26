@@ -60,3 +60,5 @@ class Tcp
     }
 
 }
+
+$tcp = new Tcp();
