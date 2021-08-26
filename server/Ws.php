@@ -78,7 +78,7 @@ class Ws
         
         swoole_timer_after(5000, function() use($serv, $frame) {
             echo "5s-after\n";
-            $serv->push($frame->fd, "server-time-after:")
+            $serv->push($frame->fd, "server-time-after:");
         });
         $serv->push($frame->fd, "Server-push:{$frame->data} Time:" . date('Y-m-d H:i:s'));
     }
