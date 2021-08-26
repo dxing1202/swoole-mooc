@@ -82,7 +82,12 @@ class Ws
      */
     public function onTask($serv, $task_id, $reactor_id, $data)
     {
-        echo "New AsyncTask[id={$task_id}]".PHP_EOL;
+        print_r($data);
+        // 耗时场景
+        sleep(10);
+        return "on task finish"; // 返回 告诉worker
+
+        // echo "New AsyncTask[id={$task_id}]".PHP_EOL;
         // 返回任务执行的结果
         // $this->serv->finish("{$data} -> OK");
     }
