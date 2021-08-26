@@ -20,7 +20,9 @@ class Ws
         //创建WebSocket Server对象
         $this->serv = new Swoole\WebSocket\Server($this->host, $this->port);
         // 服务配置
-        // $this->serv->set([]);
+        $this->serv->set([
+            'task_worker_num' => 2
+        ]);
 
         $this->serv->on('open', [$this, 'onOpen']);
         $this->serv->on('message', [$this, 'onMessage']);
@@ -43,7 +45,6 @@ class Ws
     public function onOpen($serv, $request)
     {
         # Log记录 连接连接
-        var_dump($request);
         // 请求时间
         $date = date('Y-m-d H:i:s', $request->server["request_time"]);
         $log = sprintf("Time:%s Client:%s IP:%s Connection successful\n", $date, $request->fd, $request->server['remote_addr']);
