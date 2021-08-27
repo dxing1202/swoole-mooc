@@ -22,9 +22,7 @@ $co = Co\run(function () {
    	echo $content . PHP_EOL;
    	fclose($fp);
 
+   	// 测试顺序运行
+	echo "start" . PHP_EOL;
+
 });
-
-var_dump($co);
-
-// ceshi
-echo "start" . PHP_EOL;
