@@ -10,7 +10,7 @@ Co\run(function () {
     $file = __DIR__ . "/1.txt";
     echo $file . PHP_EOL;
     echo filesize($file) . PHP_EOL;
-   	$content = fread($file);
+   	$content = fread($file, filesize($file));
    	echo $content;
    	fclose($file);
 });
