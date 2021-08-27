@@ -1,6 +1,6 @@
 <?php
 
-Co::set(['hook_flags' => SWOOLE_HOOK_FILE]);
+// Co::set(['hook_flags' => SWOOLE_HOOK_FILE]);
 
 Co\run(function () {
 
