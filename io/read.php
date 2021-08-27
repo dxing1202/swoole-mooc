@@ -1,10 +1,9 @@
 <?php
 
-/**
- * 读取文件
- * __DIR__
- */
-swoole_async_readfile(__DIR__."/1.txt", function($filename, $fileContent) {
-	echo "filename:" . $filename . PHP_EOL;
-	echo "content:" . $fileContent. PHP_EOL;
+Co::set(['hook_flags' => SWOOLE_HOOK_FILE]);
+
+Co\run(function () {
+    $fp = fopen("1.txt", "a+");
+    fwrite($fp, str_repeat('A', 2048));
+    fwrite($fp, str_repeat('B', 2048));
 });
