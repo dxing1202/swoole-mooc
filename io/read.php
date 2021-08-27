@@ -9,7 +9,8 @@ Co\run(function () {
     var_dump(__DIR__);
     $file = __DIR__ . "/1.txt";
     echo $file . PHP_EOL;
-   	$content = fread($file, filesize($file));
+    echo filesize($file) . PHP_EOL;
+   	$content = fread($file);
    	echo $content;
    	fclose($file);
 });
