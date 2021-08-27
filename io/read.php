@@ -8,7 +8,7 @@ $filePath = __DIR__ . "/1.txt";
 # 设置加载协程Hook 
 Co::set(['hook_flags' => SWOOLE_HOOK_FILE]);
 
-Co\run(function () use ($filePath) {
+$co = Co\run(function () use ($filePath) {
 
 	# 协程文件操作 4.3+版本后不推荐 【推荐使用一键协程化 Hook】
 	// var_dump( Co\System::statvfs('/') );
@@ -25,7 +25,11 @@ Co\run(function () use ($filePath) {
    	// echo $content . PHP_EOL;
    	// fclose($fp);
 
-   	// 测试顺序运行
-	echo "start" . PHP_EOL;
+
 
 });
+
+var_dump($co);
+
+// 测试顺序运行
+echo "start" . PHP_EOL;	
