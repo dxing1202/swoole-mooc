@@ -51,6 +51,10 @@ class Http
         //根据 $controller, $action 映射到不同的控制器类和方法
         // (new $controller)->$action($request, $response);
 
+        Swoole\Coroutine\run(function () {
+            var_dump(Swoole\Coroutine\System::statvfs('/'));
+        });
+
         // 设置header头部信息
         $response->header('Content-Type', 'text/html; charset=utf-8');
         // 打印GET请求
