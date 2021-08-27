@@ -41,10 +41,10 @@ class Http
     public function onRequest($request, $response)
     {
         // 解决Chrome 请求两次问题
-        // if ($request->server['path_info'] == '/favicon.ico' || $request->server['request_uri'] == '/favicon.ico') {
-        //     $response->end();
-        //     return;
-        // }
+        if ($request->server['path_info'] == '/favicon.ico' || $request->server['request_uri'] == '/favicon.ico') {
+            $response->end();
+            return;
+        }
 
         // URL路由
         // list($controller, $action) = explode('/', trim($request->server['request_uri'], '/'));
