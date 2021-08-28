@@ -10,11 +10,15 @@ Co::set(['hook_flags' => SWOOLE_HOOK_FILE]);
 
 Co\run(function () use ($filePath) {
     
-    $fp = fopen($filePath, "w");
+    $fp = fopen($filePath, "a");
+
+    #  clearstatcache()函数结果会被缓存，使用 clearstatcache() 来清除缓存
+    // clearstatcache();
+    // $fileSize = filesize($filePath);
 
     $content = date("Ymd H:i:s");
 
-   	$fwResult = fwrite( $fp, $content );
+   	$fwResult = fwrite($fp, $content);
 
    	if ( $fwResult ) {
    		echo "success" . PHP_EOL;
