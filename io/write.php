@@ -12,15 +12,17 @@ Co\run(function () use ($filePath) {
     
     $fp = fopen($filePath, "w");
 
-    $content = date("Ymd H:i:s");
+    var_dump(expression: $fp);
 
-   	$fwResult = fwrite($fp, $content);
+    // $content = date("Ymd H:i:s");
 
-   	if ( $fwResult ) {
-   		echo "success" . PHP_EOL;
-   	}
+   	// $fwResult = fwrite($fp, $content);
 
-   	fclose($fp)
+   	// if ( $fwResult ) {
+   	// 	echo "success" . PHP_EOL;
+   	// }
+
+   	// fclose($fp)
 
 });
 
