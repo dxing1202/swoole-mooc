@@ -14,13 +14,13 @@ Co\run(function () use ($filePath) {
 
     var_dump($fp);
 
-    // $content = date("Ymd H:i:s");
+    $content = date("Ymd H:i:s");
 
-   	// $fwResult = fwrite($fp, $content);
+   	$fwResult = fwrite($fp, $content);
 
-   	// if ( $fwResult ) {
-   	// 	echo "success" . PHP_EOL;
-   	// }
+   	if ( $fwResult ) {
+   		echo "success" . PHP_EOL;
+   	}
 
    	// fclose($fp)
 
