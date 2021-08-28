@@ -12,7 +12,7 @@ Co\run(function () use ($filePath) {
     
     $fp = fopen($filePath, "w");
 
-    var_dump(expression: $fp);
+    var_dump($fp);
 
     // $content = date("Ymd H:i:s");
 
