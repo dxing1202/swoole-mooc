@@ -20,7 +20,7 @@ Co\run(function () use ($filePath) {
    		echo "success" . PHP_EOL;
    	}
 
-   	fclose($fp)
+   	fclose($fp);
 
 });
 
