@@ -16,7 +16,7 @@ Co\run(function () use ($filePath) {
     // clearstatcache();
     // $fileSize = filesize($filePath);
 
-    $content = date("Ymd H:i:s");
+    $content = date("Ymd H:i:s") . PHP_EOL;
 
    	$fwResult = fwrite($fp, $content);
 
