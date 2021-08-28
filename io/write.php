@@ -14,7 +14,7 @@ Co\run(function () use ($filePath) {
 
     $content = date("Ymd H:i:s");
 
-   	$fwResult = fwrite($fp, $content);
+   	$fwResult = fwrite( $fp, $content, filesize($filePath) );
 
    	if ( $fwResult ) {
    		echo "success" . PHP_EOL;
