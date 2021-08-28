@@ -5,8 +5,8 @@
 # 如果端口被占用，可以用以上的命令进行查询 是哪些程序|服务占用，Kill掉
 
 # 使用协程风格服务
-use Swoole\Coroutine\Http\Server;
-use function Swoole\Coroutine\run;
+// use Swoole\Coroutine\Http\Server;
+// use function Swoole\Coroutine\run;
 
 /**
  * Http Swoole Server Class
@@ -25,24 +25,26 @@ class Http
 
     public function __construct()
     {
-        run(function () {
-            //创建WebSocket Server对象
-            // $this->serv = new Swoole\Http\Server($this->host, $this->port);
-            $this->serv = new Server($this->host, $this->port, false);
-            // HTTP服务配置
-            $this->serv->set([
-                'enable_static_handler' => true,
-                'document_root' => '/www/wwwroot/swoole-mooc/data'
-            ]);
+        // run(function () {
+            
+        // });
+        
+        //创建WebSocket Server对象
+        $this->serv = new Swoole\Http\Server($this->host, $this->port);
+        // $this->serv = new Server($this->host, $this->port, false);
+        // HTTP服务配置
+        $this->serv->set([
+            'enable_static_handler' => true,
+            'document_root' => '/www/wwwroot/swoole-mooc/data'
+        ]);
 
-            $this->serv->on('request', [$this, 'onRequest']);
+        $this->serv->on('request', [$this, 'onRequest']);
 
-            // 执行异步任务回调函数
-            // $this->serv->on('task', [$this, 'onTask']);
-            // $this->serv->on('finish', [$this, 'onFinish']);
+        // 执行异步任务回调函数
+        // $this->serv->on('task', [$this, 'onTask']);
+        // $this->serv->on('finish', [$this, 'onFinish']);
 
-            $this->serv->start();
-        });
+        $this->serv->start();
     }
 
     public function onRequest($request, $response)
@@ -59,13 +61,13 @@ class Http
         // (new $controller)->$action($request, $response);
 
         # 日志写入
-        $logData = [
-            'date:'  => date("Y-m-d H:i:s"),
-            'get:'   => $request->get,
-            'post:'  => $request->post,
-            'header' => $request->header
-        ];
-        $this->saveRequestLog($data);
+        // $logData = [
+        //     'date:'  => date("Y-m-d H:i:s"),
+        //     'get:'   => $request->get,
+        //     'post:'  => $request->post,
+        //     'header' => $request->header
+        // ];
+        // $this->saveRequestLog($data);
 
         // 设置header头部信息
         $response->header('Content-Type', 'text/html; charset=utf-8');
