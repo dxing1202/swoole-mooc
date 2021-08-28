@@ -12,8 +12,6 @@ Co\run(function () use ($filePath) {
     
     $fp = fopen($filePath, "w");
 
-    var_dump($fp);
-
     $content = date("Ymd H:i:s");
 
    	$fwResult = fwrite($fp, $content);
@@ -22,7 +20,7 @@ Co\run(function () use ($filePath) {
    		echo "success" . PHP_EOL;
    	}
 
-   	// fclose($fp)
+   	fclose($fp)
 
 });
 
