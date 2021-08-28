@@ -51,6 +51,15 @@ class Http
         //根据 $controller, $action 映射到不同的控制器类和方法
         // (new $controller)->$action($request, $response);
 
+        # 日志写入
+        $logData = [
+            'date:'  => date("Y-m-d H:i:s"),
+            'get:'   => $request->get,
+            'post:'  => $request->post,
+            'header' => $request->header
+        ];
+        $this->saveRequestLog($data);
+
         // 设置header头部信息
         $response->header('Content-Type', 'text/html; charset=utf-8');
         // 打印GET请求
@@ -58,6 +67,35 @@ class Http
         // 设置cookie
         // $response->cookie("singwa", "xsss", time() + 1800);
         $response->end('<h1>Hello Swoole. #' . rand(1000, 9999) . "<br/>GET: " . json_encode($request->get) . '</h1>');
+    }
+
+    protected function saveRequestLog($data)
+    {
+        $date = date("Y-m-d");
+        $filePath = __DIR__ . '/../logs/' . $date . ".log";
+
+        # 设置加载协程Hook 
+        Co::set(['hook_flags' => SWOOLE_HOOK_FILE]);
+
+        Co\run(function () use ($filePath) {
+            
+            $fp = fopen($filePath, "a");
+
+            #  clearstatcache()函数结果会被缓存，使用 clearstatcache() 来清除缓存
+            // clearstatcache();
+            // $fileSize = filesize($filePath);
+
+            // $date = date("Ymd H:i:s") . PHP_EOL;
+
+            $fwResult = fwrite($fp, json_encode($data) . PHP_EOL);
+
+            if ( $fwResult ) {
+                echo "success" . PHP_EOL;
+            }
+
+            fclose($fp);
+
+        });
     }
 
 }
