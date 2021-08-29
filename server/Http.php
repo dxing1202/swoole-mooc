@@ -80,6 +80,9 @@ class Http
 
     protected function saveRequestLog($data)
     {
+        # tail -f access.log
+        # Linux 实时查看日志更新
+
         $date = date("Y-m-d");
         $filePath = __DIR__ . '/../logs/' . $date . ".log";
 
@@ -105,6 +108,7 @@ class Http
             fclose($fp);
 
         });
+
     }
 
 }
