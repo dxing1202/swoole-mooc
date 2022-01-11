@@ -9,7 +9,7 @@ use function Swoole\Coroutine\go;
 run(function () {
     go(function () {
 
-    	$host = '47.242.171.213';
+    	$host = '127.0.0.1';
     	$dbname = 'tiansuan';
     	$charset = 'utf8';
     	$uname = 'tiansuan';
