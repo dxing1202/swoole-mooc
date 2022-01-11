@@ -16,7 +16,7 @@ run(function () {
     	$pass = 'KM4hAx4yG2rKaxpY';
 
         $pdo = new PDO("mysql:host={$host};dbname={$dbname};charset={$charset}", $uname, $pass);
-        $statement = $pdo->prepare('SELECT * FROM `tiansuan`');
+        $statement = $pdo->prepare('SELECT * FROM `ts_test`');
         $statement->execute();
         var_dump($statement->fetchAll());
     });
