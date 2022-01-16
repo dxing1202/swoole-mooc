@@ -9,7 +9,7 @@
 class Ws
 {
     // Swoole\Server对象
-    protected $serv = null;
+    protected $server = null;
     // 监听主机 对应外网的IP 0.0.0.0监听所有ip
     protected $host = '0.0.0.0';
     // 监听端口号 
@@ -38,18 +38,18 @@ class Ws
 
     /**
      * onOpen 监听WS连接事件
-     * @param  object $serv Swoole\WebSocket\Serve 服务对象
+     * @param  object $server Swoole\WebSocket\Serve 服务对象
      * @param  object $request Swoole\Http\Request 请求对象信息
      * @return void   无
      */
-    public function onOpen($serv, $request)
+    public function onOpen($server, $request)
     {
         # Log记录 连接连接
         // 请求时间
         $date = date('Y-m-d H:i:s', $request->server["request_time"]);
         $log = sprintf("Time:%s Client:%s IP:%s Connection successful\n", $date, $request->fd, $request->server['remote_addr']);
         echo $log;
-
+        
         // 测试Timer
         if ( $request->fd == 1 ) {
             // 每2秒执行
@@ -57,16 +57,16 @@ class Ws
                 echo "2s: timerId: {$time_id}" . PHP_EOL;
             });
         }
-        $serv->push($request->fd, "hello, welcome\n");
+        $server->push($request->fd, "hello, welcome\n");
     }
 
     /**
      * onMessage 监听WS消息事件
-     * @param  object $serv Swoole\WebSocket\Serve 服务对象
+     * @param  object $server Swoole\WebSocket\Serve 服务对象
      * @param  object $frame  Swoole\WebSocket\Frame 客户端发来的数据帧信息对象
      * @return void   无
      */
-    public function onMessage($serv, $frame) {
+    public function onMessage($server, $frame) {
         echo "Message: {$frame->data}\n";
         // Todo 10s
         $data = [
@@ -74,25 +74,28 @@ class Ws
             'fd' => $frame->fd
         ];
         // 异步任务
-        // $serv->task($data);
+        // $server->task($data);
         
-        swoole_timer_after(5000, function() use($serv, $frame) {
+        swoole_timer_after(5000, function() use($server, $frame) {
             echo "5s-after\n";
-            $serv->push($frame->fd, "server-time-after:");
+            $server->push($frame->fd, "server-time-after:");
         });
-        $serv->push($frame->fd, "Server-push:{$frame->data} Time:" . date('Y-m-d H:i:s'));
+        // swoole_timer_tick(500, function() use($server, $frame) {
+        //     $server->push( $frame->fd, time() );
+        // });
+        $server->push($frame->fd, "Server-push:{$frame->data} Time:" . date('Y-m-d H:i:s'));
     }
 
     /**
      * onTask 异步任务回调函数
-     * @param  object $serv Swoole\WebSocket\Serve 服务对象
+     * @param  object $server Swoole\WebSocket\Serve 服务对象
      * @param  int $task_id    任务ID 由Swoole扩展内自动生成，用于区分不同的任务
      * @param  int $reactor_id 来自于哪个worker进程
      * $task_id和$reactor_id组合起来才是全局唯一的，不同的wokrer进程投递的任务ID可能会有相同
      * @param  array $data     任务内容&数据
      * @return void 无
      */
-    public function onTask($serv, $task_id, $reactor_id, $data)
+    public function onTask($server, $task_id, $reactor_id, $data)
     {
         // print_r($data);
         echo "New AsyncTask[id={$task_id}]".PHP_EOL;
@@ -103,18 +106,18 @@ class Ws
         // 任务完成自动执行 finish 回调函数
     }
 
-    public function onFinish($serv, $task_id, $data)
+    public function onFinish($server, $task_id, $data)
     {
         echo "AsyncTask[{$task_id}] Finish: {$data}".PHP_EOL;
     }
 
     /**
      * onClose 监听WebSocket连接关闭事件
-     * @param  object $serv Swoole\WebSocket\Server 服务对象
+     * @param  object $server Swoole\WebSocket\Server 服务对象
      * @param  object $fd   客户端ID
      * @return void   无
      */
-    public function onClose($serv, $fd)
+    public function onClose($server, $fd)
     {
         # Log记录 关闭事件
         // 当前时间
